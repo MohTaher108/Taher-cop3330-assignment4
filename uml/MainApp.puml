@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class anchorPane {
++ AnchorPane anchorPane
++ addAnchorPaneToTab()
++ addAnchorPaneToTitledPane()
+}
+
+class contextMenuForTitledPanes {
++ ContextMenu contextMenu
++ MenuItem removeTitledPane
++ menuItem markTitledPane
+}
+
+class titledPane {
++ TitledPane titledPane
++ anchorPane anchorPane
++ TextField Description
++ TextField DueDate
++ contextMenuForTitledPanes contextMenu
++ editTitledPaneName()
++ removeItemFromAccordion()
++ addTitledPaneToAccordion()
++ addTextFieldToAnchorPane()
+}
+
+class accordion{
++ Accordion accordion
++ addAccordionToAnchorPane()
+}
+
+class contextMenuForTabs {
++ ContextMenu contextMenu
++ menuItem removeTab
++ menuItem editTab
++ menuItem displayAllItems
++ menuItem displayIncompleteItems
++ menuItem displayCompleteItems
++ menuItem saveTodoList
++ menuItem sortTitledPanesByDuedate
+}
+
+class tab{
++ Tab tab
++ contextMenuForTabs contextMenu
++ EditNameOfTab()
++ removeTabFromTabPane()
++ addTabToTabPane()
+}
+
+class contextMenuForTabPanes {
++ ContextMenu contextMenu
++ menuItem saveAllTodoLists
++ menuItem loadTodoList
++ menuItem loadAllTodoLists
+}
+
+class tabPane {
++ TabPane tabPane
++ contextMenuForTabPanes contextMenu
++ addTabPaneToAnchorPane()
+}
+
+anchorPane o-- tabPane : contains >
+tabPane *-- tab : contains >
+tab o-- accordion : contains >
+accordion *-- titledPane : contains >
+
+tabPane o-- contextMenuForTabPanes : contains >
+tab o-- contextMenuForTabs : contains >
+titledPane o-- contextMenuForTitledPanes : contains >
+
+@enduml
